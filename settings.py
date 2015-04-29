@@ -44,13 +44,12 @@ USE_L10N = True
 
 MEDIA_ROOT = os.path.join(PROJECT_PATH, "media")
 MEDIA_URL = "/media/"
-ADMIN_MEDIA_PREFIX="/media/admin/"
+ADMIN_MEDIA_PREFIX = '/static/admin'
+STATIC_ROOT = os.path.join(PROJECT_PATH, 'static')
+STATIC_URL = "/static/"
 
 
-# URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
-# trailing slash.
-# Examples: "http://foo.com/media/", "/media/".
-ADMIN_MEDIA_PREFIX = '/media/'
+
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = '+oxscu581sn2fhm!4vgr!soraqzb*mt6x21ww3&zz5x#ym1e(h'
@@ -71,7 +70,7 @@ MIDDLEWARE_CLASSES = (
     'cms.middleware.page.CurrentPageMiddleware',
     'cms.middleware.user.CurrentUserMiddleware',
     'cms.middleware.toolbar.ToolbarMiddleware',
-    'cms.middleware.media.PlaceholderMediaMiddleware',
+
 )
 
 ROOT_URLCONF = 'myproject.urls'
@@ -89,25 +88,31 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.sites',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+
     'south',
 
     'cms',
     'mptt',
     'menus',
     'south',
-    'appmedia',
     # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
-    # Uncomment the next line to enable admin documentation:
+   
+    'sekizai',
+        # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.auth',
+
     'django.core.context_processors.i18n',
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'cms.context_processors.media',
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.static',
+    'sekizai.context_processors.sekizai',
 )
 
 # CMS SPECIFIC
@@ -118,5 +123,5 @@ LANGUAGES = [
 
 CMS_TEMPLATES = (
     ('template_1.html', 'Template One'),
-    ('template_2.html', 'Template Two'),
+    
 )
